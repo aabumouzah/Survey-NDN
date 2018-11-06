@@ -38,7 +38,7 @@ The early revolution of the internet has evolved the concept of the host-to-host
 
 NDN took its principle from the Content-Centric Network (CCN) architecture that was publically presented in 2009 by professor Van Jacobson \cite{Jacobson:2009:NNC:1658939.1658941}\cite{Jacobson2012}\cite{Fukuda2009}. CCN was created based on the concept of the Host-Centric networking that is used on the current internet; by replacing the dependency of the IP address into the content-name on routing. NDN provides more efficiency and security assurance when sharing data over the public network. NDN abandoned the hosting entity, where users can be more concerned about data than the host of that data per se. Table \ref{tab1} explains the major differences between the host-centric and named-based networking \cite{Abdallah2015}. 
 
-Current internet has been always suffering on security, leaving many threats unsolved properly. One of these threats is the DDoS attack. Attackers, using online zombies or bots, can target a specific node or network and exhaust it with a fake packets that causes undesirable traffic. DDoS by overwhelming the network could cause a degradation on the network performance. Furthermore, it could target a specific host which could crash the CPU and shout the service down \cite{6496396}.
+Current internet has been always suffering on security, leaving many threats unsolved properly \cite{Smetters2009}. One of these threats is the DDoS attack. Attackers, using online zombies or bots, can target a specific node or network and exhaust it with a fake packets that causes undesirable traffic. DDoS by overwhelming the network could cause a degradation on the network performance. Furthermore, it could target a specific host which could crash the CPU and shout the service down \cite{6496396}.
 
 \begin{table}[htbp]
 \caption{Differences between Host-Centric and Named-Based Networking}
@@ -179,36 +179,59 @@ Wang \textit{et al.} \cite{Wang2014} proposed an architecture that called Cooper
 
 This approach proofed its effectiveness for reducing the consumption of the PIT memory as well as increasing the rate of of the legitimate interests satisfaction. However, since it only triggers and monitors the attacker's prefixes the mitigation is effective to prevent attacks that target a specific publisher but not attacks that target the network infrastructure. In addition, the DDOS attack is still applicable.    
 
-Nguyen \textit{et al.} \cite{Nguyen2015} proposed a scheme to detect the interest flooding attack that is based on statistical hypothesis testing theory. Their proposed detector strengths lay on three features: (1) The scalability; (2) controlability of the false alarm and (3) analytically established evaluation. The scheme is simply designed to monitor the rate of interfaces with and without the attack. The ratio of the interfaces when there is an attack is higher than the ratio in normal conditions. Meanwhile, the rate of data retrieved remains the same in both hypotheses. As a result, the data ratio under attack comparing with the normal conditions is lower. Authors in this scheme rely on the false-alarm controlability to determine when an attack is occurring by resetting the detection threshold accordingly.   
+Nguyen \textit{et al.} \cite{Nguyen2015} proposed a scheme to detect the interest flooding attack that is based on statistical hypothesis testing theory. Their proposed detector strengths lay on three features: (1) The scalability; (2) controlability of the false alarm and (3) analytically established evaluation. The scheme is simply designed to monitor the rate of interfaces with and without the attack. The ratio of the interfaces when there is an attack is higher than the ratio in normal conditions. Meanwhile, the rate of data retrieved remains the same in both hypotheses. As a result, the data ratio under attack comparing with the normal conditions is lower. Authors in this scheme rely on the false-alarm controlability to determine when an attack is occurring by resetting the detection threshold accordingly \cite{8452848}.    
 
-To evaluate their hypotheses, they implement their scheme in a simulator with only one attacker and eight nodes, which bounded the effectiveness evaluation on a bigger topology or when there is a distributed ddos attack. 
+To evaluate their hypotheses, they implement their scheme in a simulator with only one attacker and eight nodes, which bounded the effectiveness evaluation on a bigger topology or when there is a distributed ddos attack.
 
+Vassilios \textit{et al}.\cite{Vassilakis2015} proposed an approach that mitigates the interests flooding attack upon the user behaviour, which improves the detection ability at the early stages of the attack. Their approach classified routers into two types: One type is the \textit{Edge router} which is connected directly to one or more users. This Type provide an additional security layer by detecting any abnormal user's behaviour and notify other routers about it. The other type is \textit{Core router}, which is connected directly to the other routers or sources. This Type provide the attack notifications and share them with all other routers among the network. Authors proposed three phases of the mitigation mechanisms: First phase is the Attack Detection where the edge router detects the abnormal behaviour of the user and then identifies this user as a suspicious or an attacker. Second phase is Rate Deduction or Blocking, where the edge router starts reducing and limiting the data rate for the suspicious user and block the attackers. Third phase is the Attack Notification, where the edge router starts notifying the other routers in the network about the deducted attack and the identity of the suspicious users which prevent the dynamic/mobile interests flooding attack.
+
+
+To improve their scheme and to empower the notification phase effectively, they proposed a public-key based scheme that allow only the authenticated routers to share those notifications which then protect the network from the any malicious notifications. This scheme is based on the Certificate Authority, where routers that directly connected to the CA can be trusted. Whereas, router that no directly connected to the CA must at least be authenticated by a mediator, a router that directly connected to the CA, in order to be able to share a notification.      
+
+
+
+
+
+\section{Discussions}
+
+In spite of the fact that there are plenty of contributions to mitigate or eliminate the impact of the interests flooding attack but the attack is still attainable. However, it does not mean that the proposed solutions were not feasible, but the attack aspects are myriad and stressful. Most of the proposed mechanisms impacted the legitimate interests in a way or another. The drawback of the rate limiting based solutions, for example, that was supposed to countermeasure the suspicious interfaces could penalize the legitimate user's interests and limit its rate ration.   
+ 
+In addition to the aforementioned papers, there are other mechanisms, not covered in this survey, that mitigate the attack from different aspects. One of which that proposed to modify the router's components by increasing and augmenting the router with a bigger PIT, longer caching time and delete the malicious interests from the router's PIT \cite{Wang2012}\cite{Virgilio2013}. Other approaches proposed solutions with a proof of the client's work\cite{Li2014}. However, most of those were reactive not proactive approaches. Meaning that, they might detect the attack by monitoring the interface and PITs size then mitigate it by limiting or eliminating the malicious interests.  
+
+Using the Stateful protocol, which enable the the interest and data exchange, provides some benefits to the NDN architecture. One benefit is that PIT maintains the forwarding state of the interest/data, enabling the router to monitor and forward a content back and forth easily by identifying the interface that corresponding to the PIT entry. In addition, PIT uses the entries mechanism that allows to create an entry for a new received interest, however, if there is a related entry to that interest it shall be added to this entry which avoid the redundancy of the PIT entries in the router. Also, by exchanging the information about the Round Trip Time (RTT) of the interest and content, PIT can provide a good balance of the network path to avoid congestion \cite{Yi2012}\cite{Wang2013}. 
+
+With all the aforementioned facts about PIT, attackers can easily exploit its resources to launch the IFA attack by exhausting the PIT memory on a router or degrading the network performance by proliferating the number of malicious interests. Therefore, in such cases, router will either drop the new incoming interests or delete existing entries to free some resources for the arriving interests. However, again that might also affect the legitimate interests.     
+
+There are alternative contributions to proactively mitigate this attack. 
+
+Another way to deal with this attack is to be proactive. There are some other contributions covered the attack's  
+
+
+\cite{Ghali2015}
+
+
+Most of the proposed works are reactive not proactive 
+
+\cite{Chen2015}
+\cite{Ahlgren2012}
+\cite{Universite2018}
 
 \cite{Tourani2018}
 \cite{Bhattacharyya2018}
 \cite{Chhetry2016}
-\cite{Abdallah2015}
-\cite{Chen2015}
 
+\cite{8352953}
+\cite{8247232}
+
+\cite{Xin2016ANI}
 \cite{Zhang:2014:NDN:2656877.2656887}
 \cite{Compagno2013}
 
 
-\cite{Xin2016ANI}
-\cite{Chhetry2016}
 
-\cite{8247232}
+\cite{Abdallah2015} 
 \cite{Zhao2018}
-\cite{8352953}
-\cite{8452848}
 
-\section{Discussions}
-
-\cite{Abdallah2015}
-\cite{Chen2015}
-\cite{Smetters2009}
-\cite{Ahlgren2012}
-\cite{Universite2018}
 
     I should cover the other type of threats that target NDN security. 
     item Attack that targets the CS.

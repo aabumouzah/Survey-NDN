@@ -265,6 +265,19 @@ volume = {55},
 year = {2012}
 }
 
+@article{Vassilakis2015,
+abstract = {Copyright {\textcopyright} 2015 IARIA. Named Data Networking (NDN) is a novel networking approach that aims at overcoming some of the limitations of the current Internet. In particular, NDN aims at providing better privacy and security by focusing on the data items themselves rather than on the location of data. This is achieved by using soft states at the routers, which record the requests/interests for data from users in the Pending Interest Table (PIT). However, this new networking concept opens up avenues for launching Distributed Denial-of-Service (DDoS) attacks on PITs. That is, an attacker may flood the network with a large number of Interest packets that would overflow the PITs at the routers, thus preventing legitimate users from receiving the requested data. This type of DDoS attack is known as the Interest Flooding Attack (IFA) and, if not adequately dealt with, may severely disrupt the normal operation of an NDN system. In this paper, we first show that the basic NDN mechanism is vulnerable to IFA even when the attacker has very limited resources. Next, we propose a mitigation technique that allows routers to quickly identify and block such DDoS attempts, by detecting anomalous user behaviour. We also introduce an additional security layer by using public-key based router authentication. We evaluate our proposed scheme by means of computer simulations and show that a sufficient level of security can be achieved with little processing and storage overhead.},
+author = {Vassilakis, V.G. and Moscholios, I.D. and Alohali, B.A. and Logothetis, M.D.},
+file = {:Users/MacPro/OneDrive - University of Colorado Colorado Springs/CS6000-Fall-2018-Survey/Papers/aict{\_}2015{\_}1{\_}50{\_}10068.pdf:pdf},
+isbn = {9781612084114},
+journal = {AICT 2015 - 11th Advanced International Conference on Telecommunications},
+keywords = {Distributed Denial of Service,Interest Flooding Attack,Named Data Networking},
+mendeley-groups = {IFA},
+number = {c},
+pages = {18--23},
+title = {{Mitigating distributed denial-of-service attacks in named data networking}},
+year = {2015}
+}
 
 
 .
@@ -514,4 +527,103 @@ file = {:C$\backslash$:/Users/futur/Desktop/IFA/A multifold approach to address 
 mendeley-groups = {IFA},
 title = {{MECHANISMS IN I NFORMATION -C ENTRIC}},
 year = {2018}
+}
+
+@article{Ghali2015,
+abstract = {Information-Centric Networking (ICN) is a recent paradigm that claims to mitigate some limitations of the current IP-based Internet architecture. The centerpiece of ICN is named and addressable content, rather than hosts or interfaces. Content-Centric Networking (CCN) is a prominent ICN instance that shares the fundamental architectural design with its equally popular academic sibling Named-Data Networking (NDN). CCN eschews source addresses and creates one-time virtual circuits for every content request (called an interest). As an interest is forwarded it creates state in intervening routers and the requested content back is delivered over the reverse path using that state. Although a stateful forwarding plane might be beneficial in terms of efficiency, and resilience to certain types of attacks, this has not been decisively proven via realistic experiments. Since keeping per-interest state complicates router operations and makes the infrastructure susceptible to router state exhaustion attacks (e.g., there is currently no effective defense against interest flooding attacks), the value of the stateful forwarding plane in CCN should be re-examined. In this paper, we explore supposed benefits and various problems of the stateful forwarding plane. We then argue that its benefits are uncertain at best and it should not be a mandatory CCN feature. To this end, we propose a new stateless architecture for CCN that provides nearly all functionality of the stateful design without its headaches. We analyze performance and resource requirements of the proposed architecture, via experiments.},
+archivePrefix = {arXiv},
+arxivId = {1512.07755},
+author = {Ghali, Cesar and Tsudik, Gene and Uzun, Ersin and Wood, Christopher A.},
+eprint = {1512.07755},
+file = {:Users/MacPro/OneDrive - University of Colorado Colorado Springs/CS6000-Fall-2018-Survey/Papers/Living in a pit-less world- A case against stateful forwarding in content-centric networking.pdf:pdf},
+mendeley-groups = {IFA},
+title = {{Living in a PIT-less World: A Case Against Stateful Forwarding in Content-Centric Networking}},
+url = {http://arxiv.org/abs/1512.07755},
+year = {2015}
+}
+
+
+@article{Yi2012,
+abstract = {In Named Data Networking (NDN) architecture, packets carry data names rather than source or destination addresses. This change of paradigm leads to a new data plane: data consumers send out Interest packets, routers forward them and maintain the state of pending Interests, which is used to guide Data packets back to the consumers. NDN routers' forwarding process is able to detect network problems by observing the two-way traffic of Interest and Data packets, and explore multiple alternative paths without loops. This is in sharp contrast to today's IP forwarding process which follows a single path chosen by the routing process, with no adaptability of its own. In this paper we outline the design of NDN's adaptive forwarding, articulate its potential benefits, and identify open research issues.},
+archivePrefix = {arXiv},
+arxivId = {0704.2054v1},
+author = {Yi, Cheng and Afanasyev, Alexander and Wang, Lan and Zhang, Beichuan and Zhang, Lixia},
+doi = {10.1145/2317307.2317319},
+eprint = {0704.2054v1},
+file = {:Users/MacPro/Library/Application Support/Mendeley Desktop/Downloaded/Yi et al. - 2012 - Adaptive forwarding in named data networking.pdf:pdf},
+isbn = {0146-4833},
+issn = {01464833},
+journal = {ACM SIGCOMM Computer Communication Review},
+keywords = {adaptive forwarding,data plane,ndn},
+mendeley-groups = {Information Centric Networking/CCN/NDN/Routing},
+number = {3},
+pages = {62},
+pmid = {1000004892},
+title = {{Adaptive forwarding in named data networking}},
+url = {http://dl.acm.org/citation.cfm?doid=2317307.2317319},
+volume = {42},
+year = {2012}
+}
+
+
+@article{Wang2013,
+abstract = {Hop-by-hop interest shaping has been proposed as a viable congestion control mechanism in Named Data Networking (NDN). Interest shaping exploits the strict receiver-driven traffic pattern and the symmetric bidirectional forwarding in NDN to control the returning data rate. In this paper, we point out that both interests and contents contribute to congestion and their interdependence must be considered in any interest shaping algorithm. We first analyze this issue mathematically by formulating it as an optimization problem to obtain the optimal shaping rate. Then a practical interest shaping algorithm is proposed to achieve high link utilization without congestive data loss. We further note that flow differentiation in NDN is complicated and design our scheme independently of traffic flows. We demonstrate our hop-by-hop interest shaper in conjunction with simple Additive-Increase-Multiplicative-Decrease (AIMD) clients using the ns3-based NDN simulator (ndnSIM). Our results show that the proposed shaping algorithm can effectively control congestion and achieve near-optimal throughput.},
+author = {Wang, Yaogong and Rozhnova, Natalya and Narayanan, Ashok and Oran, David and Rhee, Injong},
+doi = {10.1145/2491224.2491233},
+file = {:Users/MacPro/OneDrive - University of Colorado Colorado Springs/CS6000-Fall-2018-Survey/Papers/An improved hop-by-hop interest shaper for congestion control in named data networking.pdf:pdf},
+isbn = {9781450321792},
+issn = {01464833},
+journal = {Proceedings of the 3rd ACM SIGCOMM workshop on Information-centric networking - ICN '13},
+keywords = {congestion control,information-centric networking},
+mendeley-groups = {Information Centric Networking},
+pages = {55},
+title = {{An improved hop-by-hop interest shaper for congestion control in named data networking}},
+url = {http://dl.acm.org/citation.cfm?doid=2491224.2491233},
+volume = {1},
+year = {2013}
+}
+
+
+@article{Wang2012,
+author = {Wang, K and Others},
+file = {:Users/MacPro/OneDrive - University of Colorado Colorado Springs/CS6000-Fall-2018-Survey/Papers/Content-centric networking- Effect of content caching on mitigating DoS attack.pdf:pdf},
+journal = {International Journal of Computer Science},
+keywords = {and simulation,computer network reliability,content caching,content-centric networking,network modeling},
+mendeley-groups = {IFA},
+number = {3},
+pages = {43--52},
+title = {{Content-Centric Networking: Effect of Content Caching on Mitigating DoS Attack}},
+volume = {9},
+year = {2012}
+}
+
+
+@article{Virgilio2013,
+abstract = {Content Centric Networking represents a paradigm shift in the evolution and definition of modern network protocols. Many research efforts have been made with the purpose of proving the feasibility and the scalability of this proposal. Our main contribution is to provide an analysis of the Pending Interest Table memory requirements in real deployment scenarios, especially considering the impact of distributed denial of service attacks. In fact, the state that the protocol maintains for each resource request makes the routers more prone to resources exhaustion issues than in traditional stateless solutions. Our results are derived by using a full custom simulator and considering the different node architectures that have been proposed as valid reference models. The main outcomes point out differentiated weaknesses in each architecture we investigated and underline the need for improvements in terms of security and scalability.},
+author = {Virgilio, Matteo and Marchetto, Guido and Sisto, Riccardo},
+doi = {10.1145/2491224.2491225},
+file = {:Users/MacPro/OneDrive - University of Colorado Colorado Springs/CS6000-Fall-2018-Survey/Papers/PIT overload analysis in content centric networks.pdf:pdf},
+isbn = {9781450321792},
+journal = {Proceedings of the 3rd ACM SIGCOMM workshop on Information-centric networking - ICN '13},
+keywords = {content centric networking,ddos attacks,security,sim-},
+mendeley-groups = {IFA},
+pages = {67},
+title = {{PIT overload analysis in content centric networks}},
+url = {http://dl.acm.org/citation.cfm?doid=2491224.2491225},
+year = {2013}
+}
+
+@article{Li2014,
+abstract = {As a design of information-centric network architecture, Na-med Data Networking (NDN) provides content-based secu-rity. The signature binding the name with the content is the key point of content-based security in NDN. However, sign-ing a content will introduce a significant computation over-head, especially for dynamically generated content. Adver-saries can take advantages of such computation overhead to deplete the resources of the content provider. In this paper, we propose Interest Cash, an application-based countermea-sure against Interest Flooding for dynamic content. Interest Cash requires a content consumer to solve a puzzle before it sends an Interest. The content consumer should provide a solution to this puzzle as cash to get the signing service from the content provider. The experiment shows that an adver-sary has to use more than 300 times computation resources of the content provider to commit a successful attack when Interest Cash is used.},
+author = {Li, Zhaogeng and Bi, Jun},
+doi = {10.1145/2619287.2619298},
+file = {:Users/MacPro/OneDrive - University of Colorado Colorado Springs/CS6000-Fall-2018-Survey/Papers/Interest cash- An application-based countermea- sure against interest flooding for dynamic content in named data networking.pdf:pdf},
+isbn = {9781450329422},
+journal = {Proceedings of The Ninth International Conference on Future Internet Technologies - CFI '14},
+keywords = {Interest Cash,Interest Flooding,NDN},
+mendeley-groups = {IFA},
+pages = {1--6},
+title = {{Interest Cash: An Application-based Countermeasure Against Interest Flooding for Dynamic Content in Named Data Networking}},
+url = {http://dl.acm.org/citation.cfm?doid=2619287.2619298},
+year = {2014}
 }
