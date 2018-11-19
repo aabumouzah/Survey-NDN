@@ -8,6 +8,11 @@
 \frenchspacing  
 \usepackage{wrapfig}
 \usepackage{tabularx}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+\usepackage{pseudocode}
+
+
     
 \begin{document}
 
@@ -22,7 +27,7 @@ Email: aabumouz@uccs.edu}
 \maketitle
 
 \begin{abstract}
-Today's internet is exposed to a lot of security breaches; one of them is denial-of-service (DoS) or distributed DoS (DDoS). Named-data networking is one of the proposed architectures that promised to resolve many of today's internet limitations, including security weaknesses and vulnerabilities. NDN however is like any other architecture, has its own weaknesses and vulnerabilities. \textit{Interest flooding attack} is one of these attacks that can targeted in the NDN. It could exhaust the nodes resources in the NDN routers or producer's content. This survey illustrates the different ways of how to launch this attack and what are the proposed mitigation and countermeasures including the previous and most recent work.   
+Today's internet is exposed to a lot of security breaches; one of them is denial-of-service (DoS) or distributed DoS (DDoS). Named-data networking (NDN) is one of the proposed architectures that promised to resolve many of today's internet limitations including, but not limited to, security weaknesses and vulnerabilities. NDN however is like any other architecture, has its own weaknesses and vulnerabilities. \textit{Interest flooding attack} is one of these attacks that can targeted in the NDN. It could exhaust the nodes resources in the NDN routers or producer's content. This survey demonstrate the different ways of how to launch this attack and what the proposed mitigation and countermeasures are, including the previous and most recent work. This survey also covered the attack from both the stateful and stateless perspectives.    
 
 \end{abstract}
 
@@ -36,7 +41,7 @@ Information-Centring-Networking is considered to be the next future internet arc
 
 The early revolution of the internet has evolved the concept of the host-to-host communication using the IP address as a presenter for each host. However, with the vast extension of the internet adoption and the need for robust security, users’ requirements and the nature of the applications dispute the capability of current architecture. Thus, there has been a consensus that there is a necessity to develop a different model that address all those services and can concurrently operate on the existing mediums, if possible.  
 
-NDN took its principle from the Content-Centric Network (CCN) architecture that was publically presented in 2009 by professor Van Jacobson \cite{Jacobson:2009:NNC:1658939.1658941}\cite{Jacobson2012}\cite{Fukuda2009}. CCN was created based on the concept of the Host-Centric networking that is used on the current internet; by replacing the dependency of the IP address into the content-name on routing. NDN provides more efficiency and security assurance when sharing data over the public network. NDN abandoned the hosting entity, where users can be more concerned about data than the host of that data per se. Table \ref{tab1} explains the major differences between the host-centric and named-based networking \cite{Abdallah2015}. 
+NDN took its principle from the Content-Centric Network (CCN) architecture that was publicly presented in 2009 by professor Van Jacobson \cite{Jacobson:2009:NNC:1658939.1658941}\cite{Jacobson2012}\cite{Fukuda2009}. CCN was created based on the concept of the Host-Centric networking that is used on the current internet; by replacing the dependency of the IP address into the content-name on routing. NDN provides more efficiency and security assurance when sharing data over the public network. NDN abandoned the hosting entity, where users can be more concerned about data than the host of that data per se. Table \ref{tab1} explains the major differences between the host-centric and named-based networking \cite{Abdallah2015}. 
 
 Current internet has been always suffering on security, leaving many threats unsolved properly \cite{Smetters2009}. One of these threats is the DDoS attack. Attackers, using online zombies or bots, can target a specific node or network and exhaust it with a fake packets that causes undesirable traffic. DDoS by overwhelming the network could cause a degradation on the network performance. Furthermore, it could target a specific host which could crash the CPU and shout the service down \cite{6496396}.
 
@@ -64,15 +69,15 @@ Current internet has been always suffering on security, leaving many threats uns
 
 
 
-Although NDN provides a resilient security architecture, DDoS attacks are still applicable. Interests are recorded in the NDN through the router's Pending Interest Tables (PIT) \cite{Cheng2012}. PITs creates new entry for each interest that has no corresponding content on the Content Store (CS), and was not previously requested by another node. Routers use the PITs entries to forward back, at the same path, the retrieved data to the consumer/requester. Attackers can launch a DDoS attack on the NDN by injecting spoofed interests that would neither be satisfied in the routers nor on the end-hosts. Those spoofed interests can either overload the PIT entries in a router which eliminate the ability of the router to serve any further legitimate interest. Also, this attack can be achieved by creating an non-existing interest that would be forwarded to all neighbored nodes all over the internet by the Forwarding Information Table (FIB) \cite{Xin2016ANI}; this approach with an excessive number of spoofed interest could cause a degradation on the network performance. This type of attacks is named Interest Flooding Attack (IFA) in the named data networking. 
+Although NDN provides a resilient security architecture, DDoS attacks are still applicable. Interests are recorded in the NDN network through the router's Pending Interest Tables (PIT) \cite{Cheng2012}. PITs creates new entry for each interest that has no corresponding content on the Content Store (CS), and was not previously requested by another node. Routers use the PITs entries to forward back, at the same path, the retrieved data to the consumer/requester. Attackers can launch a DDoS attack on the NDN by injecting spoofed interests that would neither be satisfied in the routers nor on the end-hosts. Those spoofed interests can either overload the PIT entries in a router which eliminate the ability of the router to serve any further legitimate interest. Also, this attack can be achieved by creating a non-existing interest that would be forwarded to all neighbored nodes all over the internet by the Forwarding Information Table (FIB) \cite{Xin2016ANI}; this approach with an excessive number of spoofed interest could cause a degradation on the network performance. This type of attacks is named Interest Flooding Attack (IFA) in the named data networking. 
 
-in this paper, we illustrates the NDN architecture in section II. Section III explains the IFA attack. Section IV analyze the current literature. Section V provide some discussion questions. in section VI we conclude this paper.   
+in this paper, will illustrate the NDN architecture in section II. Section III explains the IFA attack. Section IV analyze the current literature. Section V provide some discussion questions. in section VI provides the related works and in section VII we conclude the paper.   
 
 
 \section{NDN Architecture Overview}
-The principle and sturdy design of the NDN architecture is a derivation from the current host-centric network architecture (IP). \cite{Pan2011}. The phenomenal design of the IP internet hourglass involves the thin waist layer which allows both the upper and lower layers to operate independently; it is however the element that causes most of the limitations of the design per se. IP architecture proposed to allow a communication network among endpoints entities that their packets could only be named digitally through the IP address. However, With the dominant growth of the digital media, e-commerce and social network there became a need to use the internet not only for network communication but for content distribution. As per Cisco white paper \cite{Cisco2015}, on 2014, the content delivery network such as Netflix, Youtube and Akamai had carried about 39\% of the global internet traffic expecting this number to grow up to 62\% on 2019.
+The principle and sturdy design of the NDN architecture is a derivation from the current host-centric network architecture (IP). \cite{Pan2011}. The phenomenal design of the IP internet hourglass involves the thin waist layer which allows both the upper and lower layers to operate independently; it is however the element that causes most of the limitations of the design per se. IP architecture proposed to allow a communication network among endpoints entities that their packets could only be named digitally through the IP address. However, With the dominant growth of the digital media, e-commerce and social network there became a need to use the internet not only for network communication but for content distribution. As per Cisco white paper \cite{Cisco2015}, on 2014, the content delivery network such as Netflix, Youtube and Akamai had carried about 39\% of the global internet traffic expecting this number to grow up to 62\% of overall network on 2019.
 
-Just because how the distribution network is more general than the communication network, it is more complex to solve distribution problems with the IP architecture proposals. NDN hourglass architecture Figure.[1] retains the internet hourglass with evolving the thin waist layer to not only containing those problems, but also providing secured and more efficient platform.
+Just because how the distribution network is more general than the communication network, it is more complex to solve distribution problems with the IP architecture proposals. NDN hourglass architecture Figure [1] retains the internet hourglass with evolving the thin waist layer to not only containing those problems, but also providing secured and more efficient platform.
 
 NDN architecture removes the restrictions of using the endpoints as the only source to fetch or secure data. In contrast to the communication network, NDN changes the concept of relying on network services from only delivering the packets from a given node address to also being able to retrieve data that identified by a given name. Thus it serves the content distribution schemes more properly.
 \begin{figure} [ht]
@@ -85,12 +90,13 @@ NDN architecture removes the restrictions of using the endpoints as the only sou
 NDN by its mean contains significant components that are used for communication: \textbf{\textit{Interest}} the packet that consumer creates to request a specific content. \textbf{\textit{Data}} the packet that forwards the requested content. \textbf{\textit{Consumer/Requester}} the one that creates an interest packet for a specific content. \textbf{\textit{Producer}} the node that generates and owns the actual content. \textbf{\textit{Provider}}: the node that has a cached content and participates on satisfying the incoming interests. Before the producer returns a requested Data, it gets encrypted and signed by the producer, of which verified by the consumer. 
 
 
-In order to forward a packet, NDN constructs three structures\cite{Zhang:2014:NDN:2656877.2656887}: \textbf{Content Store (CS)} It caches the arrived Data packets for the future interests that request the same content. \textbf{Pending Interest Tables (PIT)} It contains tables for the pending interests. It Creates an entry for each Interest packet that records the name of the interest, incoming interface and outgoing interface. Once a data packet arrives, router forwards that packet downstream to the requester; if no data packet arrives then the entry expires. \textbf{Forwarding Information Base (FIB)} It is similar to the IP FIBs, which contains a list of the next and available destinations prefix names that forwards the interest packet upstream. Except that IP FIBs rout to the best single next-hop, whereas NDN FIBs route to a ranked list of routes.\\
-When a consumer creates an interest packet, the router first searches the CS looking for a matching \textit{Content Namespace (CN)} that associated with the interest's CN; if a match found, a data packet that has the content and was signed by the provider get forwarded to the consumer. Otherwise, the router looks up in the PIT to find a corresponding entry. If a corresponding entry is found, then it creates a new interface for the incoming interest packet and adds it into the interfaces list within this existing entry, which is known as \textit{interest aggregation}. Whenever the corresponding data packet is available, it forwards it to all the consumers that waiting for the data in that entry. If no corresponding entry is found, the router creates a new PIT entry and then forwards the interest packet to FIB. FIB then forwards the interest packet to all the neighbors on the list, where the \textit{longest prefix match (LPM)} is performed for the CN. FIB creates multiple LPMs for the CN. For example, for /youtube/video/CS6000/lectures CN, the LPMs will be like: /youtube/, /youtube/video/, /youtube/video/CS6000, /youtube/video/CS6000/lectures. The forward slash "/" is used to explicitly delimit the boundaries for each packet; it splits the content into segments with predictable and readable names. Once the longest matching found for these LPMs, FIB forwards the interest packet to the next associated hops. Otherwise, the interest packet is flooded and forwarded to all the outgoing interfaces or deleted as per the router's forwarding policies.
+In order to forward a packet, NDN constructs three structures\cite{Zhang:2014:NDN:2656877.2656887}: \textbf{Content Store (CS)} It caches the arrived Data packets for the future interests that request the same content. \textbf{Pending Interest Tables (PIT)} It contains tables for the pending interests. It Creates an entry for each Interest packet that records the name of the interest, incoming interface and outgoing interface. Once a data packet arrives, router forwards that packet downstream to the requester; if no data packet arrives then the entry expires. \textbf{Forwarding Information Base (FIB)} It is similar to the IP FIBs, which contains a list of the next and available destinations prefix names that forwards the interest packet upstream. Except that IP FIBs rout to the best single next-hop, whereas NDN FIBs route to a ranked list of routes.
 
-When interest packet is satisfied with a data packet, data packet will be returned with the requested content and the producer's key. Figure [2]. When the data packet arrives at the NDN router, the router first looks-up for all the corresponding PIT entries and forwards it, in revers through the same path, to all the interfaces on the list of incoming interfaces related to this packet. Next, router deletes the PIT entry. In the CS, to serve future requests for the same content, the router caches the content based on the local caching policies. 
 
-Because of the lifetime policy of the PIT entry, if the interest packet is not served in a certain amount of time, the PIT entry will be deleted from the incoming list. Accordingly, in case of no corresponding PIT entry is found, the data packet will be dropped too.
+When a consumer creates an interest packet, the router first searches the CS looking for a matching \textit{Content Namespace (CN)} that associated with the interest's CN; if a match found, a data packet that has the content and was signed by the provider get forwarded to the consumer. Otherwise, the router looks up in the PIT to find a corresponding entry. If a corresponding entry is found, then the router creates a new interface for the incoming interest packet and adds it into the interfaces list within this existing entry, which is known as \textit{interest aggregation}. Whenever the corresponding data packet is available, the router forwards it to all the consumers that waiting for this data in that entry. If no corresponding entry is found, the router creates a new PIT entry and then forwards the interest packet to FIB. FIB then forwards the interest packet to all the neighbors on the list, where the \textit{longest prefix match (LPM)} is performed for the CN. FIB creates multiple LPMs for the CN. For example, for /youtube/video/CS6000/lectures CN, the LPMs will be like: /youtube/, /youtube/video/, /youtube/video/CS6000, /youtube/video/CS6000/lectures. The forward slash "/" is used to explicitly delimit the boundaries for each packet; it splits the content into segments with predictable and readable names. Once the longest matching Prefix found for these LPMs, FIB forwards the interest packet to the next associated hops. Otherwise, the interest packet is flooded and forwarded to all the outgoing interfaces or deleted as per the router's forwarding policies \cite{8352953}.
+
+
+When interest packet is satisfied with a data packet, data packet will be returned with the requested content and the producer's key Figure [2]. When the data packet arrives at the NDN router, the router first looks-up for all the corresponding PIT entries and forwards the data packet, in revers through the same path, to all the interfaces on the list of incoming interfaces related to this packet. Next, router deletes the PIT entry. In the CS, to serve future requests for the same content, the router caches the content based on the local caching policies. 
 
 \begin{figure} [ht]
     \centering
@@ -98,13 +104,54 @@ Because of the lifetime policy of the PIT entry, if the interest packet is not s
     \caption{\small Packets architecture in NDN}
     \label{fig:my_label1}
 \end{figure}
+
+Because of the lifetime policy of the PIT entry, if the interest packet is not served in a certain amount of time, the PIT entry will be deleted from the incoming list. Accordingly, in case of no corresponding PIT entry is found, the data packet will be dropped too.
+
+
+\begin{algorithm}
+\caption{NDN forwarding plane}
+\begin{algorithmic}[1]
+\While {(True)}
+\State Listen to incoming interests:
+\If {(Content interest available in CS)}
+\State Fetch the content data back to requester 
+\Else  { Forward content interest to PIT}
+\EndIf\\
+\If {(Matching entry exists in PIT)}
+\State Add the interest to this entry
+\Else { Create new entry for this interest packet }
+\State  Create a time to live (TTL) for this entry
+\State  Forward it to FIB
+\EndIf\\
+\While{(Entry is not expired)}
+\State FIB creates TTL for the interest packet
+\State FIB forwards interest packet upstream to all 
+\State matching LPM
+\If {(Content data is found)}
+\State Forward this content downstream to the 
+\State corresponding PITs at the same path
+\State PIT fetch the content data
+\State PITs forwards this content data to all 
+\State corresponding nodes in the existing entry
+\ElsIf{ content packet is not found}
+\State FIBs keep forwarding interest packet until 
+\State the last edge of the network
+\ElsIf { Content packet is not found and the interest 
+\State packet is expired}
+\State return NACK
+\EndIf
+\EndWhile
+\EndWhile
+\end{algorithmic}
+\end{algorithm}
   
 Security in NDN is different from the current host-centric networking. Security is provided in the current internet by securing the mediums, where data and packets are transmitted. It focuses on securing the channels with different security schemes and protocols such as \cite{NGUYEN201517}\cite{661700}\cite{Fumy1998}\cite{Prentice-Hall:2000:ISP:518066}, leaving the actual packets unsecured. Within the growth of network communications, there have been needs to create more protocols to support and serve answering these communications. However, more protocols means more overhead on the network, more standardization, more configuration and less interoperability \cite{cholez:hal-00785298}. Cryptography is one of the proposed solutions that provides a solid security, however, it also adds more overhead on the current processing. In addition, it's not a mandatory feature on a lot of systems that operate on the current host-centric networks.
 
-In contrast, security in NDN concentrate more on securing the data packets than the channels. Contents can be located and retrieved on and from the endpoint hosts as well as the routers. NDN adapts encryption schemes for a robust security. It enforces the encryption at the production stage. Producers are compelled to sign each content with their own digital signature. Moreover, NDN provides a separate layer to encrypt every content; making this scheme a mandatory for all contents which then efficiently guarantees the integrity and authenticity for these packets regardless of how, when or where they are retrieved from \cite{Gasti2013}. Without a need for a digital certificate, NDN facilitates the security implementation by allowing the applications to manage how security is going to be executed and performed.     
+In contrast, security in NDN concentrate more on securing the data packets than the channels. Contents can be located and retrieved on and from the endpoint hosts as well as the routers. NDN adapts encryption schemes for a robust security. It enforces the encryption at the production stage. Producers are compelled to sign each content with their own digital signature. Moreover, NDN provides a separate layer to encrypt every content, making this scheme a mandatory for all contents which then efficiently guarantees the integrity and authenticity for these packets regardless of how, when or where they are retrieved from \cite{Gasti2013}. 
 
-   
+The Public Key Infrastructure (PKI) is enabled with the NDN. Producer can use the signature algorithm to sign a data packet; to verify this signature, the consumer can use the producer's public key which allow to apply an efficient verification algorithm. In addition, data can be encrypted using the symmetric encryption. Producer can sign the data packet with a secret key, the Consumer can request this key by sending a signed interest; producer then can verify this request by verifying the consumer's signature and then send the secret key back after encrypting it with the consumer's public key. Certificates fetching and verification may include multiple rounds which cause overhead on some cases. Therefore, NDN facilitates the security implementation to involve the routers to benefit from the caching property. Routers can cache the validated certificates to be reused until they expired or revoked which reduces the certificate verification overhead.  \cite{Zhang2018} 
 
+Besides the PKI, NDN obtains security by utilizing the trust management distribution. Producers can specify the verification policies to how their data should be verified. Consumers also can specify their own trust anchor\footnote{Trust Anchor is where the trusted root certificates are stored}. within the trust anchor, the producer can define their trust policies that specify who is trusted to perform what actions, and what keys should be used for a namespace and purpose of a data.  
 
 
 \section{Interest Forwarding Attack (IFA)}
@@ -194,52 +241,45 @@ To improve their scheme and to empower the notification phase effectively, they 
 
 \section{Discussions}
 
-In spite of the fact that there are plenty of contributions to mitigate or eliminate the impact of the interests flooding attack but the attack is still attainable. However, it does not mean that the proposed solutions were not feasible, but the attack aspects are myriad and stressful. Most of the proposed mechanisms impacted the legitimate interests in a way or another. The drawback of the rate limiting based solutions, for example, that was supposed to countermeasure the suspicious interfaces could penalize the legitimate user's interests and limit its rate ration.   
+In spite of the fact that there are plenty of contributions to mitigate or eliminate the impact of the interests flooding attack but the attack is still attainable. However, it does not mean that the proposed solutions were not feasible, but the attack aspects are myriad and stressful. Most of the proposed mechanisms impacted the legitimate interests in a way or another. The drawback of the rate limiting based solutions, for example, that was supposed to countermeasure the suspicious interfaces could penalize the legitimate user's interests and limit its rate ratio.   
  
 In addition to the aforementioned papers, there are other mechanisms, not covered in this survey, that mitigate the attack from different aspects. One of which that proposed to modify the router's components by increasing and augmenting the router with a bigger PIT, longer caching time and delete the malicious interests from the router's PIT \cite{Wang2012}\cite{Virgilio2013}. Other approaches proposed solutions with a proof of the client's work\cite{Li2014}. However, most of those were reactive not proactive approaches. Meaning that, they might detect the attack by monitoring the interface and PITs size then mitigate it by limiting or eliminating the malicious interests.  
 
-Using the Stateful protocol, which enable the the interest and data exchange, provides some benefits to the NDN architecture. One benefit is that PIT maintains the forwarding state of the interest/data, enabling the router to monitor and forward a content back and forth easily by identifying the interface that corresponding to the PIT entry. In addition, PIT uses the entries mechanism that allows to create an entry for a new received interest, however, if there is a related entry to that interest it shall be added to this entry which avoid the redundancy of the PIT entries in the router. Also, by exchanging the information about the Round Trip Time (RTT) of the interest and content, PIT can provide a good balance of the network path to avoid congestion \cite{Yi2012}\cite{Wang2013}. 
+Using the Stateful protocol, which enables the the interest and the data to be exchanged, provides some benefits to the NDN architecture. One benefit is that PIT maintains the forwarding state of the interest/data, enabling the router to monitor and forward a content back and forth easily by identifying the interface that correspond to the PIT entry and the interest's prefix in each router. In addition, PIT uses the entries mechanism that allows to create an entry for a new received interest, however, if there is a related entry to that interest it shall be added to this entry which avoid the redundancy of the PIT entries in the router and eliminate the interest replication on the network. Also, by exchanging the information about the Round Trip Time (RTT) of the interest and content, PIT can provide a good balance of the network path to avoid congestion \cite{Yi2012}\cite{Wang2013}.  
 
-With all the aforementioned facts about PIT, attackers can easily exploit its resources to launch the IFA attack by exhausting the PIT memory on a router or degrading the network performance by proliferating the number of malicious interests. Therefore, in such cases, router will either drop the new incoming interests or delete existing entries to free some resources for the arriving interests. However, again that might also affect the legitimate interests.     
-
-There are alternative contributions to proactively mitigate this attack. 
-
-Another way to deal with this attack is to be proactive. There are some other contributions covered the attack's  
+With all the aforementioned facts about PIT, attackers can easily exploit its resources to launch the IFA attack by exhausting the PIT memory on a router or degrading the network performance by proliferating the number of malicious interests. Therefore, in such cases, router will either drop the new incoming interests or delete existing entries to free some resources for the arriving interests. However, again that might also affect the legitimate interests. Moreover, with all the previously demonstrated mitigation countermeasures, those are explicitly still reactive implications not proactive ones.      
 
 
-\cite{Ghali2015}
+As previously mentioned, PIT plays a major role on saving the state of the interest which is significantly used within the stateful protocol as a forward plane to forward the interest/content back and forth between the requester and provider. However, stateless protocol disables this property and removes it from the PIT. As an alternative solution for eliminating the IFA attack proactively from the root is to replace the stateful protocol by the stateless protocol.
+
+In contrast to the stateful NDN, Stateless NDN prevents routers to save the state of the interest prefix by removing the PIT component from the architecture itself. This approach terminates the core source for the attackers to launch the IFA attack which all stored in the PIT. However, this requires a significant modification on the design and roles of the other NDN components including the CS and FIB. Few papers \cite{Ghali2015}\cite{Universite2018}\cite{Azgin2016}  argue the necessity of the PIT for the objects forwarding. Their proposals provide abstract solutions to remove the PIT services and distribute them to the other components on the architecture without violating the main value of the named data networking concepts which are having the data moved and stored in the network.
 
 
-Most of the proposed works are reactive not proactive 
+In stateless forwarding design, a new filter is added into the packet to carry the revers path information. The implementation of this mechanism differ from each approach. Authors in \cite{Ghali2015} proposed a new mechanism to implement the stateless protocol instead of the stateful. The main idea behind their approach is to include a new field in the interest called Backwards Routable Name (BRN) which maintain the routable prefix like an IP address source.    
+Like the IPv6 address, the BRNs is advertised at the global namesapce, which specify where the corresponding content should be delivered to. To deliver the data content properly, the interest's BRN will be carried by the corresponding content to be used as the routbale name towards the interest's origin. This, however, requires some modification on the FIB to enable it to carry those information. This approach is inspired by the IP-all packets architecture which enable the interest/content to be forwarded through the address they carry not the state of the network. This approach though could violates the security and privacy requirements of the NDN by exposing information, which stored in the in-packet filters, on the end-hosts 
 
-\cite{Chen2015}
-\cite{Ahlgren2012}
-\cite{Universite2018}
+In \cite{Azgin2016}, Authors proposed an in-packet filter approach that is based on Counting-Bloom Filter to consolidate the state information within the interest's filters. This approach supports the main aspect of the stateful forwarding by efficiently monitoring the path of the interest origin which allow the data content to be reversed to the requester at the same path. The main idea of Bloom Filtering is to reduce the exchanged data between the end-hosts \cite{Marandi}. Their format optimization reduces the overall networking overhead. To practically study the performance of their format and its impact on the system parameter, they implement a comprehensive study of the impact of different types of bloom filters under various forwarding scenarios including the classic bloom filter, counting bloom filter and dynamic in-packet filter, which is a non-bloom filter based filter. Their analysis observation proved that bloom filter introduces significant overhead that triggered by false positives. Whereas the counting bloom filter (CBF) avoids false positives significantly and reduces the overall overhead.
 
-\cite{Tourani2018}
-\cite{Bhattacharyya2018}
-\cite{Chhetry2016}
+Overall, replacing the stateful protocol with stateless protocol participate on proactively  resolving the interest flood attack from its root. This mechanism also prove that it is applicable to serve all the other services that PITs provided including avoiding the network congestion and provide a good balance of the network.  
 
-\cite{8352953}
-\cite{8247232}
-
-\cite{Xin2016ANI}
-\cite{Zhang:2014:NDN:2656877.2656887}
-\cite{Compagno2013}
+\section{Related Work}
+There are several surveys that demonstrated the Interest flooding attack from the PIT prospective but none of them as my knowledge at the time of this survey mentioned the stateless as mitigation proposal. \cite{rai2018survey} is the most recent comprehensive work that survey the IFA attack detection and mitigation proposals. The survey, however, focused on the works that based on the state of the PIT services. Authors in \cite{Tourani2018}\cite{Chhetry2016}\cite{Chen2015}
+\cite{Ahlgren2012} also provide a comprehensive survey for attacks in the NDN architecture including the IFA. Nevertheless, most of these surveys only covered the impact of the PIT services that enabled by the stateful protocols. In addition, as all other surveys, they comparable analysis were based on the state of the PIT services, the satisfaction ration and PIT size particularly which does not solve the root cause of the attack.
 
 
-
-\cite{Abdallah2015} 
-\cite{Zhao2018}
-
-
-    I should cover the other type of threats that target NDN security. 
-    item Attack that targets the CS.
-    item Since CS and PIT are the two structures where mostly consume the memory when serving an interest packet, they are potential for the IFA attack. 
-    item Attack that targets the FIB 
+Unfortunately  I couldn't find any survey that study the current works on the stateless forwarding plane. I covered some of the papers that related to this subject but there is a need to work on survey to include the pros and cons  of the stateless approaches on all the available papers. 
 
 \section{Conclusion}
+Information-centric networking (ICN) considered to resolve most of the problems on the current standard IP address based network. Named-named networking (NDN), one of the dominant proposed ICN architectures, that potentially be the future adopted internet architecture that provide a scalable, resilient and robust internet architecture. However, there is a big apprehension on breaching the security and privacy requirements. 
 
+This survey demonstrates one of the of the most dangerous attacks on the current internet and on the NDN networking too. This paper covers the mitigation and countermeasures of the IFA including the different approaches on launching the attack. The survey take on consideration most, but not all, the proposed mechanisms to eliminate the IFA attack in perspective of the stateful based forwarding plane that enables the PIT factor to store the interest and FIB information which could be negatively exploited. The paper concentrate on three mitigation monitoring categories based on the state of the an interest, PIT size and the abnormality behavior of the interest. However, all these categories are related to the PIT component which enabled by the stateful protocol. As a result, each approach is limited to its part on the architecture and none of all of the proposals prevent and eliminate the attack from its root. 
+
+This paper also considered the stateless protocol proposals that replaces the stateful based proposals. Stateless forwarding plane based solutions proved that the attack could be eliminated and prevented from its roots without changing the core values of the NDN network including the data name in-network storing and transmitting. There are not much of published work that cover this area of proposal research neither surveys that analyzed the current published contributions.
+
+As future work, I would probably consider on building up a comprehensive survey that covers the stateless based forwarding plane solutions. There is also need to provide other mechanisms on applying the stateless protocol in the NDN to not only evolve the security and privacy but in addition to improve the performance of the NDN networking architecture.   
+
+
+     
 
 
 
